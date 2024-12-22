@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import image from "../assets/1144760.png";
+import { AuthContext } from "../provider/AuthProvider";
 
 export default function () {
+  const { user, logOut } = useContext(AuthContext);
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -44,7 +48,7 @@ export default function () {
             </li>
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">daisyUI</a>
+        <a className="btn btn-ghost text-xl">Online Group-Study</a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
@@ -70,7 +74,30 @@ export default function () {
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Button</a>
+        <div>
+          {user?.email ? (
+            <div>
+              <img
+                src={user?.photoURL && user?.photoURL}
+                className="w-10 h-10 rounded-full border-2 border-gray-300"
+              />
+            </div>
+          ) : (
+            <div className="w-10 h-10 rounded-full">
+              <img src={image} alt="" />
+            </div>
+          )}
+        </div>
+        <div className="mr-4"></div>
+        {user && user?.email ? (
+          <button onClick={logOut} className="btn btn-secondary text-white">
+            Log-out
+          </button>
+        ) : (
+          <Link to="/login" className="btn btn-secondary text-white">
+            Login
+          </Link>
+        )}
       </div>
     </div>
   );
