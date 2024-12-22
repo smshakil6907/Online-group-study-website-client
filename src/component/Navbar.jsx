@@ -1,10 +1,20 @@
-import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 import image from "../assets/1144760.png";
 import { AuthContext } from "../provider/AuthProvider";
 
-export default function () {
+export default function Navbar() {
   const { user, logOut } = useContext(AuthContext);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
+
+  const closeDropdown = () => {
+    setDropdownOpen(false);
+  };
+
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -53,38 +63,45 @@ export default function () {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <a>Item 1</a>
+            <NavLink to="/">Home</NavLink>
           </li>
           <li>
-            <details>
-              <summary>Parent</summary>
-              <ul className="p-2">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
-            </details>
+            <NavLink to="/assignment">Assignment</NavLink>
           </li>
           <li>
-            <a>Item 3</a>
+            <NavLink to="/pendingAssignment">Pending Assignments</NavLink>
           </li>
         </ul>
       </div>
-      <div className="navbar-end">
+      <div className="navbar-end relative">
         <div>
           {user?.email ? (
             <div>
               <img
                 src={user?.photoURL && user?.photoURL}
-                className="w-10 h-10 rounded-full border-2 border-gray-300"
+                className="w-10 h-10 rounded-full border-2 border-gray-300 cursor-pointer"
+                onClick={toggleDropdown}
+                alt="User Profile"
               />
+              {dropdownOpen && (
+                <div
+                  className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md border z-10"
+                  onMouseLeave={closeDropdown}
+                >
+                  <ul>
+                    <li className="px-4 py-2 hover:bg-gray-200">
+                      <Link to="/createAssignment">Create Assignment</Link>
+                    </li>
+                    <li className="px-4 py-2 hover:bg-gray-200">
+                      <Link to="mySubmitted">My Submitted</Link>
+                    </li>
+                  </ul>
+                </div>
+              )}
             </div>
           ) : (
             <div className="w-10 h-10 rounded-full">
-              <img src={image} alt="" />
+              <img src={image} alt="Default Profile" />
             </div>
           )}
         </div>
