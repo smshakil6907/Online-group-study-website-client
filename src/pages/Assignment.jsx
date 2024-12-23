@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Assignment() {
   const [assignments, setAssignments] = useState([]);
@@ -65,9 +66,11 @@ export default function Assignment() {
               >
                 Delete
               </button>
-              <button className="btn btn-sm btn-warning text-white">
-                Update
-              </button>
+              <Link to={`update/${assignment._id}`}>
+                <button className="btn btn-sm btn-warning text-white">
+                  Update
+                </button>
+              </Link>
               <button className="btn btn-sm btn-primary text-white">
                 View
               </button>
