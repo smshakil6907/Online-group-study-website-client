@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../provider/AuthProvider";
 
 export default function CreateAssignment() {
+  const { user } = useContext(AuthContext);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [marks, setMarks] = useState("");
+  const [email, setEmail] = useState("");
   const [thumbnail, setThumbnail] = useState("");
   const [difficulty, setDifficulty] = useState("easy");
+  const [status, setStatus] = useState("pending");
   const [dueDate, setDueDate] = useState(new Date());
   const [successMessage, setSuccessMessage] = useState("");
   const navigate = useNavigate();
@@ -23,6 +27,8 @@ export default function CreateAssignment() {
       thumbnail,
       difficulty,
       dueDate,
+      status,
+      email: user?.email || "Guest",
     };
 
     console.log("Assignment Data:", assignmentData);
@@ -42,7 +48,9 @@ export default function CreateAssignment() {
     setDescription("");
     setMarks("");
     setThumbnail("");
+    setEmail("");
     setDifficulty("easy");
+    setStatus("pending");
     setDueDate(new Date());
     setSuccessMessage("Assignment created successfully!");
   };
@@ -110,6 +118,18 @@ export default function CreateAssignment() {
             className="w-full border p-2 rounded"
           />
         </div>
+        <div>
+          <label className="block font-medium mb-1" htmlFor="thumbnail">
+            User Email
+          </label>
+          <input
+            type="email"
+            id="email"
+            value={user?.email || "Guest"}
+            readOnly
+            className="w-full border p-2 rounded"
+          />
+        </div>
 
         <div>
           <label className="block font-medium mb-1" htmlFor="difficulty">
@@ -124,6 +144,22 @@ export default function CreateAssignment() {
             <option value="easy">Easy</option>
             <option value="medium">Medium</option>
             <option value="hard">Hard</option>
+          </select>
+        </div>
+
+        <div>
+          <label className="block font-medium mb-1" htmlFor="status">
+            Assignment Status
+          </label>
+          <select
+            id="status"
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
+            className="w-full border p-2 rounded"
+          >
+            <option value="pending">Pending</option>
+            <option value="completed">Completed</option>
+            <option value="overdue">Overdue</option>
           </select>
         </div>
 

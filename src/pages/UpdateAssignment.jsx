@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export default function UpdateAssignment() {
   const updateData = useLoaderData();
   const [dueDate, setDueDate] = useState();
+  const navigate = useNavigate();
 
   const handleUpdate = (e) => {
     e.preventDefault();
@@ -35,7 +37,14 @@ export default function UpdateAssignment() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        if (data.modifiedCount > 0) {
+          Swal.fire({
+            title: "Update Successfully!",
+            icon: "success",
+            draggable: true,
+          });
+          navigate("/assignment");
+        }
       });
   };
   return (

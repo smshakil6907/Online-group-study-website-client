@@ -1,9 +1,41 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../provider/AuthProvider";
 
-export default function MySubmited() {
+export default function MySubmitted() {
+  const [assignments, setAssignments] = useState([]);
+  const { user } = useContext(AuthContext);
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/myAssignment?email=${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setAssignments(data);
+      });
+  }, [user?.email]);
   return (
     <div>
-      <h2>The my submitted page</h2>
+      <div className="overflow-x-auto">
+        <table className="table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Title</th>
+              <th>Marks</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {assignments.map((assignment, index) => (
+              <tr key={assignment._id || index}>
+                <th>{index + 1}</th>
+                <td>{assignment.title}</td>
+                <td>{assignment.marks}</td>
+                <td>{assignment.status}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

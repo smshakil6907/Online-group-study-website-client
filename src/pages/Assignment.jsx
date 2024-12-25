@@ -71,9 +71,11 @@ export default function Assignment() {
                   Update
                 </button>
               </Link>
-              <button className="btn btn-sm btn-primary text-white">
-                View
-              </button>
+              <Link to={`/viewAssignment/${assignment._id}`}>
+                <button className="btn btn-sm btn-primary text-white">
+                  View
+                </button>
+              </Link>
             </div>
           </div>
         ))}
