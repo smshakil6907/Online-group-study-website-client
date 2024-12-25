@@ -1,21 +1,34 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../provider/AuthProvider";
 
 export default function Assignment() {
   const [assignments, setAssignments] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [difficulty, setDifficulty] = useState("");
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    fetch("http://localhost:5000/assignment")
+    fetchAssignments();
+  }, [difficulty]);
+
+  const fetchAssignments = () => {
+    let url = `http://localhost:5000/assignments?`;
+
+    if (difficulty) {
+      url += `difficulty=${difficulty}&`;
+    }
+
+    fetch(url)
       .then((res) => res.json())
       .then((data) => {
         setAssignments(data);
         setLoading(false);
       });
-  }, []);
+  };
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:5000/assignment/${id}`, {
+    fetch(`http://localhost:5000/assignment/${id}?email=${user?.email}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -24,8 +37,13 @@ export default function Assignment() {
           setAssignments(
             assignments.filter((assignment) => assignment._id !== id)
           );
-          alert("Assignment deleted successfully");
+          alert(data.message);
+        } else {
+          alert(data.message);
         }
+      })
+      .catch(() => {
+        alert("An error occurred during deletion.");
       });
   };
 
@@ -36,6 +54,19 @@ export default function Assignment() {
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold text-center mb-4">All Assignments</h1>
+      <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
+        <select
+          value={difficulty}
+          onChange={(e) => setDifficulty(e.target.value)}
+          className="border p-2 rounded w-full sm:w-1/3"
+        >
+          <option value="">All Difficulties</option>
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+      </div>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {assignments.map((assignment) => (
           <div

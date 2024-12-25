@@ -11,6 +11,7 @@ export default function UpdateAssignment() {
 
   const handleUpdate = (e) => {
     e.preventDefault();
+
     const form = e.target;
     const title = form.title.value;
     const description = form.description.value;
@@ -18,6 +19,30 @@ export default function UpdateAssignment() {
     const thumbnail = form.thumbnail.value;
     const difficulty = form.difficulty.value;
     const dueDate = form.dueDate.value;
+
+    if (title.length < 3) {
+      alert("Title must be at least 3 characters long.");
+      return;
+    }
+    if (description.length < 10) {
+      alert("Description must be at least 10 characters long.");
+      return;
+    }
+
+    if (!marks || marks <= 0) {
+      alert("Marks must be a positive number.");
+      return;
+    }
+
+    if (!thumbnail || !/^https?:\/\/.+\.(jpg|jpeg|png|gif)$/i.test(thumbnail)) {
+      alert("Please provide a valid image URL.");
+      return;
+    }
+
+    if (new Date(dueDate) <= new Date()) {
+      alert("Due date must be in the future.");
+      return;
+    }
 
     const updatedData = {
       title,
@@ -27,7 +52,7 @@ export default function UpdateAssignment() {
       difficulty,
       dueDate,
     };
-    console.log(updatedData);
+
     fetch(`http://localhost:5000/assignment/${updateData._id}`, {
       method: "PUT",
       headers: {

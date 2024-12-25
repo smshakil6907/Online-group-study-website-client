@@ -20,6 +20,30 @@ export default function CreateAssignment() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (title.length < 3) {
+      alert("Title must be at least 3 characters long.");
+      return;
+    }
+    if (description.length < 10) {
+      alert("Description must be at least 10 characters long.");
+      return;
+    }
+
+    if (!marks || marks <= 0) {
+      alert("Marks must be a positive number.");
+      return;
+    }
+
+    if (!thumbnail || !/^https?:\/\/.+\.(jpg|jpeg|png|gif)$/i.test(thumbnail)) {
+      alert("Please provide a valid image URL.");
+      return;
+    }
+
+    if (new Date(dueDate) <= new Date()) {
+      alert("Due date must be in the future.");
+      return;
+    }
+
     const assignmentData = {
       title,
       description,
@@ -147,7 +171,7 @@ export default function CreateAssignment() {
           </select>
         </div>
 
-        <div>
+        {/* <div>
           <label className="block font-medium mb-1" htmlFor="status">
             Assignment Status
           </label>
@@ -161,7 +185,7 @@ export default function CreateAssignment() {
             <option value="completed">Completed</option>
             <option value="overdue">Overdue</option>
           </select>
-        </div>
+        </div> */}
 
         <div>
           <label className="block font-medium mb-1" htmlFor="dueDate">

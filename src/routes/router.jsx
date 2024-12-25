@@ -3,12 +3,14 @@ import Home from "../component/Home";
 import MainLayout from "../layout/MainLayout";
 import Assignment from "../pages/Assignment";
 import CreateAssignment from "../pages/CreateAssignment";
+import EvaluateAssignment from "../pages/EvaluateAssignment";
 import Login from "../pages/Login";
 import MySubmitted from "../pages/MySubmitted";
 import PendingAssignment from "../pages/PendingAssignment";
 import Register from "../pages/Register";
 import UpdateAssignment from "../pages/UpdateAssignment";
 import ViewAssignment from "../pages/ViewAssignment";
+import PrivetRoutes from "./PrivetRoutes";
 
 const router = createBrowserRouter([
   {
@@ -29,20 +31,31 @@ const router = createBrowserRouter([
       },
       {
         path: "/createAssignment",
-        element: <CreateAssignment></CreateAssignment>,
+        element: (
+          <PrivetRoutes>
+            <CreateAssignment></CreateAssignment>
+          </PrivetRoutes>
+        ),
       },
       {
         path: "/assignment",
         element: <Assignment></Assignment>,
-        // loader: () => fetch("http://localhost:5000/assignment"),
       },
       {
         path: "/pendingAssignment",
-        element: <PendingAssignment></PendingAssignment>,
+        element: (
+          <PrivetRoutes>
+            <PendingAssignment></PendingAssignment>
+          </PrivetRoutes>
+        ),
       },
       {
         path: "/mySubmitted",
-        element: <MySubmitted></MySubmitted>,
+        element: (
+          <PrivetRoutes>
+            <MySubmitted></MySubmitted>
+          </PrivetRoutes>
+        ),
       },
       {
         path: "/assignment/update/:id",
@@ -53,6 +66,10 @@ const router = createBrowserRouter([
       {
         path: "/viewAssignment/:id",
         element: <ViewAssignment></ViewAssignment>,
+      },
+      {
+        path: "/evaluateAssignment/:id",
+        element: <EvaluateAssignment></EvaluateAssignment>,
       },
     ],
   },
