@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 
 export default function UpdateAssignment() {
   const updateData = useLoaderData();
-  const [dueDate, setDueDate] = useState();
+  const [dueDate, setDueDate] = useState(new Date());
   const navigate = useNavigate();
 
   const handleUpdate = (e) => {
@@ -153,7 +153,7 @@ export default function UpdateAssignment() {
           <DatePicker
             id="dueDate"
             name="dueDate"
-            selected={updateData.dueDate ? new Date(updateData.dueDate) : null}
+            selected={dueDate}
             onChange={(date) => setDueDate(date)}
             required
             className="w-full border p-2 rounded"

@@ -40,11 +40,6 @@ export default function Login() {
       .then((result) => {
         const user = result.user;
         setUser(user);
-        axios
-          .post("http://localhost:5000/jwt", user, { withCredentials: true })
-          .then((res) => {
-            console.log(res.data);
-          });
         navigate("/");
         toast.success("Logged in with Google!");
       })
