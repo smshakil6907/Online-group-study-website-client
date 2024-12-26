@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -19,6 +20,11 @@ export default function Login() {
       .then((result) => {
         const user = result.user;
         setUser(user);
+        axios
+          .post("http://localhost:5000/jwt", user, { withCredentials: true })
+          .then((res) => {
+            console.log(res.data);
+          });
         const redirectPath = location?.state?.from || "/";
         navigate(redirectPath, { replace: true });
         toast.success("Login successful!");
@@ -34,6 +40,11 @@ export default function Login() {
       .then((result) => {
         const user = result.user;
         setUser(user);
+        axios
+          .post("http://localhost:5000/jwt", user, { withCredentials: true })
+          .then((res) => {
+            console.log(res.data);
+          });
         navigate("/");
         toast.success("Logged in with Google!");
       })

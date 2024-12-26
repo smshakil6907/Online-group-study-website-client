@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -11,13 +12,17 @@ export default function PendingAssignment() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:5000/pendingAssignment")
-      .then((res) => res.json())
-      .then((data) => {
-        setPendingAssignments(data);
-        setLoading(false);
-      })
-      .catch((error) => console.error("Error fetching assignments:", error));
+    // fetch("http://localhost:5000/pendingAssignment")
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     setPendingAssignments(data);
+    //     setLoading(false);
+    //   });
+
+    axios("http://localhost:5000/pendingAssignment", {
+      withCredentials: true,
+    }).then((res) => setPendingAssignments(res.data));
+    setLoading(false);
   }, []);
 
   const openModal = (assignment) => {
