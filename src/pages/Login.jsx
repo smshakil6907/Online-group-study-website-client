@@ -21,7 +21,7 @@ export default function Login() {
         const user = result.user;
         setUser(user);
         axios
-          .post("http://localhost:5000/jwt", user, { withCredentials: true })
+          .post("https://online-group-study-assignment-server-wine.vercel.app/jwt", user, { withCredentials: true })
           .then((res) => {
             console.log(res.data);
           });

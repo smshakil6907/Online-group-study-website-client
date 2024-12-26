@@ -8,7 +8,9 @@ export default function ViewAssignment() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/assignment/${id}`)
+    fetch(
+      `https://online-group-study-assignment-server-wine.vercel.app/assignment/${id}`
+    )
       .then((res) => res.json())
       .then((data) => setAssignment(data));
   }, [id]);

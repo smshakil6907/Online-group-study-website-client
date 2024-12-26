@@ -53,7 +53,7 @@ export default function UpdateAssignment() {
       dueDate,
     };
 
-    fetch(`http://localhost:5000/assignment/${updateData._id}`, {
+    fetch(`https://online-group-study-assignment-server-wine.vercel.app/assignment/${updateData._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

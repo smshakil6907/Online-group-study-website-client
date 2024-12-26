@@ -6,7 +6,9 @@ export default function MySubmitted() {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/myAssignment?email=${user?.email}`)
+    fetch(
+      `https://online-group-study-assignment-server-wine.vercel.app/myAssignment?email=${user?.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setAssignments(data);

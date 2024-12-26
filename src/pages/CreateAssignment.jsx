@@ -55,14 +55,17 @@ export default function CreateAssignment() {
       email: user?.email || "Guest",
     };
 
-    console.log("Assignment Data:", assignmentData);
-    fetch("http://localhost:5000/assignment", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(assignmentData),
-    })
+    // console.log("Assignment Data:", assignmentData);
+    fetch(
+      "https://online-group-study-assignment-server-wine.vercel.app/assignment",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(assignmentData),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

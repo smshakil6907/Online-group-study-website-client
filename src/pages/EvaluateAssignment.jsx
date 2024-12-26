@@ -9,7 +9,9 @@ export default function EvaluateAssignment() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/assignment/${id}`)
+    fetch(
+      `https://online-group-study-assignment-server-wine.vercel.app/assignment/${id}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setAssignment(data);
@@ -26,13 +28,16 @@ export default function EvaluateAssignment() {
       status: "completed",
     };
 
-    fetch(`http://localhost:5000/assignment/evaluate/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(evaluationData),
-    })
+    fetch(
+      `https://online-group-study-assignment-server-wine.vercel.app/assignment/evaluate/${id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(evaluationData),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {

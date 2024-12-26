@@ -12,16 +12,19 @@ export default function PendingAssignment() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // fetch("http://localhost:5000/pendingAssignment")
+    // fetch("https://online-group-study-assignment-server-wine.vercel.app/pendingAssignment")
     //   .then((res) => res.json())
     //   .then((data) => {
     //     setPendingAssignments(data);
     //     setLoading(false);
     //   });
 
-    axios("http://localhost:5000/pendingAssignment", {
-      withCredentials: true,
-    }).then((res) => setPendingAssignments(res.data));
+    axios(
+      "https://online-group-study-assignment-server-wine.vercel.app/pendingAssignment",
+      {
+        withCredentials: true,
+      }
+    ).then((res) => setPendingAssignments(res.data));
     setLoading(false);
   }, []);
 
@@ -39,7 +42,7 @@ export default function PendingAssignment() {
   const handleSubmit = (event) => {
     event.preventDefault();
     // Submit the feedback and mark (you may call an API here)
-    console.log("Submitted Feedback:", feedback, "Mark:", mark);
+    // ("Submitted Feedback:", feedback, "Mark:", mark);console.log
 
     // Update the assignment with the new mark and feedback if necessary
     // Then close the modal

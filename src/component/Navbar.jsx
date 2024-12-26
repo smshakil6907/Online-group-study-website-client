@@ -5,7 +5,7 @@ import { AuthContext } from "../provider/AuthProvider";
 
 export default function Navbar() {
   const { user, logOut } = useContext(AuthContext);
-  console.log(user);
+  // console.log(user);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {

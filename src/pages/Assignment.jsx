@@ -13,7 +13,7 @@ export default function Assignment() {
   }, [difficulty]);
 
   const fetchAssignments = () => {
-    let url = `http://localhost:5000/assignments?`;
+    let url = `https://online-group-study-assignment-server-wine.vercel.app/assignments?`;
 
     if (difficulty) {
       url += `difficulty=${difficulty}&`;
@@ -28,9 +28,12 @@ export default function Assignment() {
   };
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:5000/assignment/${id}?email=${user?.email}`, {
-      method: "DELETE",
-    })
+    fetch(
+      `https://online-group-study-assignment-server-wine.vercel.app/assignment/${id}?email=${user?.email}`,
+      {
+        method: "DELETE",
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {

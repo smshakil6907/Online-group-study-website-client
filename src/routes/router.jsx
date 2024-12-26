@@ -61,7 +61,9 @@ const router = createBrowserRouter([
         path: "/assignment/update/:id",
         element: <UpdateAssignment></UpdateAssignment>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/assignment/${params.id}`),
+          fetch(
+            `https://online-group-study-assignment-server-wine.vercel.app/assignment/${params.id}`
+          ),
       },
       {
         path: "/viewAssignment/:id",

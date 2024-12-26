@@ -19,17 +19,20 @@ export default function TakeAssignmentModal({ assignmentId, onClose }) {
     };
 
     // Send submission data to the server
-    fetch("http://localhost:5000/submit-assignment", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(submissionData),
-    })
+    fetch(
+      "https://online-group-study-assignment-server-wine.vercel.app/submit-assignment",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(submissionData),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         setSuccessMessage("Assignment submitted successfully!");
-        console.log(data);
+        // console.log(data);
         // Clear inputs after submission
         setGoogleDocLink("");
         setNotes("");
