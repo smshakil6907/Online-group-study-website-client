@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import image from "../assets/1144760.png";
+import image2 from "../assets/assignment.png";
 import { AuthContext } from "../provider/AuthProvider";
 
 export default function Navbar() {
@@ -17,7 +18,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-100 sticky top-0 z-50">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -51,7 +52,7 @@ export default function Navbar() {
             </li>
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">Online Group-Study</a>
+        <img className="w-28" src={image2} alt="" />
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">

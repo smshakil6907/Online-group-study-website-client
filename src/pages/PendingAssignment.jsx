@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -12,20 +11,22 @@ export default function PendingAssignment() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // fetch("https://online-group-study-assignment-server-wine.vercel.app/pendingAssignment")
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     setPendingAssignments(data);
-    //     setLoading(false);
-    //   });
+    fetch(
+      "https://online-group-study-assignment-server-wine.vercel.app/pendingAssignment"
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setPendingAssignments(data);
+        setLoading(false);
+      });
 
-    axios(
-      "https://online-group-study-assignment-server-wine.vercel.app/pendingAssignment",
-      {
-        withCredentials: true,
-      }
-    ).then((res) => setPendingAssignments(res.data));
-    setLoading(false);
+    // axios(
+    //   "https://online-group-study-assignment-server-wine.vercel.app/pendingAssignment",
+    //   {
+    //     withCredentials: true,
+    //   }
+    // ).then((res) => setPendingAssignments(res.data));
+    // setLoading(false);
   }, []);
 
   const openModal = (assignment) => {
