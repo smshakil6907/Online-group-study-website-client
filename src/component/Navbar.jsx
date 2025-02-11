@@ -104,7 +104,7 @@ export default function Navbar() {
         </ul>
       </div>
       <div className="navbar-end relative">
-        <label className="swap swap-rotate mr-8">
+        <label className="swap swap-rotate mr-2 lg:mr-6">
           {/* this hidden checkbox controls the state */}
           <input
             type="checkbox"
