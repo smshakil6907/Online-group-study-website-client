@@ -11,9 +11,9 @@ export default function Banner() {
           Collaborate with your friends to create, complete, and grade
           assignments together. Learn, grow, and succeed as a team!
         </p>
-        <button className="mt-4 px-6 py-3 bg-white text-blue-500 font-semibold rounded-md hover:bg-gray-100 transition duration-200">
+        {/* <button className="mt-4 px-6 py-3 bg-white text-blue-500 font-semibold rounded-md hover:bg-gray-100 transition duration-200">
           Get Started Now
-        </button>
+        </button> */}
       </div>
       <div className="mt-8">
         <img

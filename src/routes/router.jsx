@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Dashboard from "../component/Dashboard";
 import Home from "../component/Home";
 import MyProfile from "../component/MyProfile";
+import NotFound from "../component/NotFound";
 import MainLayout from "../layout/MainLayout";
 import Assignment from "../pages/Assignment";
 import CreateAssignment from "../pages/CreateAssignment";
@@ -84,6 +85,10 @@ const router = createBrowserRouter([
         element: <Dashboard></Dashboard>,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFound></NotFound>,
   },
 ]);
 

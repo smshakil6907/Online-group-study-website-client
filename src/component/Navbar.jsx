@@ -163,11 +163,11 @@ export default function Navbar() {
         </div>
         <div className="mr-4"></div>
         {user && user?.email ? (
-          <button onClick={logOut} className="btn btn-secondary text-white">
+          <button onClick={logOut} className="btn btn-primary text-white">
             Log-out
           </button>
         ) : (
-          <Link to="/login" className="btn btn-secondary text-white">
+          <Link to="/login" className="btn btn-primary text-white">
             Login
           </Link>
         )}

@@ -64,7 +64,11 @@ export default function Assignment() {
   };
 
   if (loading) {
-    return <div>Loading assignments...</div>;
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
   }
 
   return (
