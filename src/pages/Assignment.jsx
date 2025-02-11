@@ -6,11 +6,12 @@ export default function Assignment() {
   const [assignments, setAssignments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [difficulty, setDifficulty] = useState("");
+  const [sortOrder, setSortOrder] = useState("desc"); // Default: High to Low
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
     fetchAssignments();
-  }, [difficulty]);
+  }, [difficulty, sortOrder]);
 
   const fetchAssignments = () => {
     let url = `https://online-group-study-assignment-server-wine.vercel.app/assignments?`;
@@ -22,9 +23,21 @@ export default function Assignment() {
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        setAssignments(data);
+        const sortedData = data.sort((a, b) => {
+          if (sortOrder === "desc") {
+            return b.marks - a.marks;
+          } else {
+            return a.marks - b.marks;
+          }
+        });
+
+        setAssignments(sortedData);
         setLoading(false);
       });
+  };
+
+  const handleSortToggle = () => {
+    setSortOrder(sortOrder === "desc" ? "asc" : "desc"); // Toggle sorting order
   };
 
   const handleDelete = (id) => {
@@ -68,6 +81,13 @@ export default function Assignment() {
           <option value="medium">Medium</option>
           <option value="hard">Hard</option>
         </select>
+
+        <button
+          onClick={handleSortToggle}
+          className="btn btn-primary px-4 py-2 rounded-lg"
+        >
+          Sort by Marks ({sortOrder === "desc" ? "High → Low" : "Low → High"})
+        </button>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -83,7 +103,7 @@ export default function Assignment() {
             />
             <div className="mt-4">
               <h2 className="font-bold text-lg">{assignment.title}</h2>
-              <p className="text-sm text-gray-600 mt-2">
+              <p className="text-sm text-gray-400 mt-2">
                 {assignment.description}
               </p>
               <p className="mt-2">

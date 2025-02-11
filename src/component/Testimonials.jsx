@@ -15,11 +15,14 @@ export default function Testimonials() {
   ];
 
   return (
-    <section className="py-12 bg-gray-100 text-center mt-8">
+    <section className="py-12 text-center mt-8">
       <h2 className="text-4xl font-bold mb-6">What Our Users Say</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
         {testimonials.map((testimonial, index) => (
-          <div key={index} className="bg-white p-6 shadow-md rounded-xl">
+          <div
+            key={index}
+            className="bg-gray-800 text-gray-300 border border-gray-300 p-6 shadow-md rounded-xl"
+          >
             <p className="text-lg italic">"{testimonial.feedback}"</p>
             <h4 className="font-semibold mt-4">- {testimonial.name}</h4>
           </div>

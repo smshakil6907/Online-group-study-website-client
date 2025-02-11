@@ -1,5 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
+import Dashboard from "../component/Dashboard";
 import Home from "../component/Home";
+import MyProfile from "../component/MyProfile";
 import MainLayout from "../layout/MainLayout";
 import Assignment from "../pages/Assignment";
 import CreateAssignment from "../pages/CreateAssignment";
@@ -72,6 +74,14 @@ const router = createBrowserRouter([
       {
         path: "/evaluateAssignment/:id",
         element: <EvaluateAssignment></EvaluateAssignment>,
+      },
+      {
+        path: "/myProfile",
+        element: <MyProfile></MyProfile>,
+      },
+      {
+        path: "/dashboard",
+        element: <Dashboard></Dashboard>,
       },
     ],
   },

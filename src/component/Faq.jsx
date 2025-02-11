@@ -30,7 +30,7 @@ export default function Faq() {
     setActiveIndex(index === activeIndex ? null : index);
   };
   return (
-    <div className="faq-section p-8 bg-gray-200 mt-8">
+    <div className="faq-section p-8 mt-8">
       <h2 className="text-2xl font-bold mb-6 text-center">
         Frequently Asked Questions
       </h2>
@@ -38,11 +38,11 @@ export default function Faq() {
         {faqs.map((faq, index) => (
           <div
             key={index}
-            className="bg-white shadow-md p-4 rounded-md cursor-pointer"
+            className="bg-gray-800 border border-gray-300 shadow-md p-4 rounded-md cursor-pointer"
             onClick={() => toggleFaq(index)}
           >
             <div className="flex justify-between items-center">
-              <h3 className="font-semibold">{faq.question}</h3>
+              <h3 className="text-gray-300 font-semibold">{faq.question}</h3>
               <span>{activeIndex === index ? "–" : "+"}</span>
             </div>
             {activeIndex === index && (
